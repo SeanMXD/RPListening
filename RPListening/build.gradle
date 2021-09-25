@@ -29,13 +29,15 @@ sourceSets {
 }
 
 task customFatJar(type: Jar) {
+    duplicatesStrategy = 'include'
+
     manifest {
         attributes 'Main-Class': 'wseemann.media.rplistening.RPListening'
         attributes 'Implementation-Title': 'rplistening-',
                    'Implementation-Version': version
     }
     
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
 
@@ -46,17 +48,17 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     // This dependency is exported to consumers, that is to say found on their compile classpath.
-    compile 'com.google.code.gson:gson:2.8.6'
-    compile 'com.squareup.okhttp3:okhttp:4.4.0'
-    compile 'info.picocli:picocli:4.6.1'
-    compile 'no.tornado:tornadofx:1.7.20'
-    compile 'org.json:json:20190722'
-    compile 'org.simpleframework:simple-xml:2.7.1'
-    compile 'org.jdom:jdom2:2.0.6'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.okhttp3:okhttp:4.4.0'
+    implementation 'info.picocli:picocli:4.6.1'
+    implementation 'no.tornado:tornadofx:1.7.20'
+    implementation 'org.json:json:20190722'
+    implementation 'org.simpleframework:simple-xml:2.7.1'
+    implementation 'org.jdom:jdom2:2.0.6'
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.5.10"
-    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
