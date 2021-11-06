@@ -35,6 +35,7 @@ Running
 RPListening can be run with a UI and without. To run with the application **with a UI** simply run the jar file
 or execute the following command in a terminal:
 
+    cd build/libs
     java -jar RPListening-1.1.jar
 
 To run the application **without a UI**:
